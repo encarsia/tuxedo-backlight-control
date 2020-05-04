@@ -34,7 +34,13 @@ class BacklightControl():
 
     colors = colors
     regions = ('left','center','right','extra')
-    params = ('state','mode','color_left','color_center','color_right','color_extra')
+    params = ('state',
+              'mode',
+              'color_left',
+              'color_center',
+              'color_right',
+              'color_extra',
+              'brightness')
 
     @staticmethod
     def get_device_param(prop):
@@ -146,6 +152,14 @@ class BacklightControl():
     def color_extra(self, value):
         BacklightControl.set_device_param('color_extra', BacklightControl.find_color_by_key(value))
 
+    @property
+    def brightness(self):
+       return BacklightControl.get_device_param('brightness')
+
+    @brightness.setter
+    def brightness(self, value):
+        BacklightControl.set_device_param('brightness', value)
+
     def display_modes(self):
         return map(BacklightControl.capitalize, self.modes)
  
@@ -176,9 +190,18 @@ if __name__ == '__main__':
     elif len(argv) == 2 and cmd in backlight.modes:
         backlight.state = 1
         backlight.mode = cmd
+    elif len(argv) == 2 and 0 <= int(argv[1]) <= 255:
+        backlight.brightness = argv[1]
     elif len(argv) == 3 and cmd == 'color' and argv[2] in list(BacklightControl.colors.keys()):
         backlight.state = 1
         backlight.set_single_color(argv[2])
+    elif len(argv) == 3 and cmd == 'color':
+        backlight.state = 1
+        colors['custom'] = argv[2]
+        try:
+            backlight.set_single_color('custom')
+        except OSError:
+            print("Custom color must be a hex color code (without leading '#').") 
     elif len(argv) == 6:
         backlight.state = 1
         for index, region in enumerate(backlight.regions):
