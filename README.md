@@ -15,11 +15,11 @@ Search for *TUXEDO Backlight Control* from the <kbd>Super</kbd> (Start) menu.
 
 ### CLI
 
-```
+```sh
 backlight <command> [<option>]
 ```
 
-```
+```sh
 Usage:
     -h, --help            Display this message
 
@@ -34,18 +34,20 @@ Usage:
                           white, silver, gray, yellow, orange, red, maroon, crimson,
                           fuchsia, purple, rose, cyan, turquoise, teal, blue, navy,
                           olive, lime, green,
-                          OR any valid colors defined in /etc/tuxedo-backlight-control/colors.conf
+                          OR any valid colors defined in /etc/tuxedo-backlight-control/colors.conf.
+                          Set a custom single color: pass hex color code.
 
                           Alternatively, set the keyboard to 4 distinct colors,
                           in the order: left, center, right, extra. Only regions supported
                           by your keyboard will have effect.
+     <brightness>         Set brightness by passing a value between 0 and 255.
 ```
 
 ### Custom Colors
 
 As of 0.5 you can add your own custom colors, by creating a `colors.conf` file in a directory `/etc/tuxedo-backlight-control`. The file should have a format like:
 
-```
+```python
 my_color1=123456
 my_color2=654321
 ```
@@ -67,7 +69,7 @@ On Debian you can verify if you have these by doing `apt show <package-name>`.
 Required modules: [tuxedo-keyboard](https://github.com/tuxedocomputers/tuxedo-keyboard)  
 Download it from the repository or git clone as below:
 
-```
+```sh
 git clone https://github.com/tuxedocomputers/tuxedo-keyboard.git
 cd tuxedo-keyboard
 ```
@@ -93,7 +95,7 @@ You can download and install the TUXEDO Keyboard .deb Package from http://deb.tu
 ### Debian
 
 Download and double-click the `.deb` package from the [releases](https://github.com/webketje/tuxedo-backlight-control/releases/latest), or run
-```
+```sh
 sudo dpkg -i tuxedo-backlight-control_0.6-1_amd64.deb
 ```
 from the folder where you downloaded it.
@@ -102,7 +104,7 @@ from the folder where you downloaded it.
 
 Download the `.pkg.tar.xz` package from the [releases](https://github.com/webketje/tuxedo-backlight-control/releases/latest), and run
 
-```
+```sh
 pacman -U tuxedo-backlight-control-0.6-1-any.pkg.tar.xz
 ```
 from the folder where you downloaded it.
@@ -113,7 +115,7 @@ Alternatively, you can use the [AUR Package](https://aur.archlinux.org/packages/
 
 ### Manual
 
-```
+```sh
 git clone https://github.com/webketje/tuxedo-backlight-control.git
 cd tuxedo-backlight-control
 ./pack.sh
@@ -121,7 +123,7 @@ cd tuxedo-backlight-control
 
 In the `dist` folder you will find distribution packages built for the supported distro's. If none of these packages fits your distribution you can manually paste the contents of the `src/` folder in your system root like so:
 
-```
+```sh
 cd src
 cp -r usr /usr
 ln -s -f -T /usr/share/tuxedo-backlight-control/backlight.py /usr/local/bin/backlight
@@ -135,19 +137,19 @@ ln -s -f -T /usr/share/tuxedo-backlight-control/backlight.py /usr/local/bin/back
 
 ### Debian:
 
-```
+```sh
 dpkg -r tuxedo-backlight-control
 ```
 
 ### Arch Linux / Manajro:
 
-```
+```sh
 pacman -Rs tuxedo-backlight-control
 ```
 
 ### Manual:
 
-```
+```sh
 rm -rf /usr/share/tuxedo-backlight-control
 unlink /usr/local/bin/backlight
 unlink /usr/share/doc/tuxedo-backlight-control/copyright

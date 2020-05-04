@@ -1,0 +1,11 @@
+post_install() {
+  systemctl enable backlight_permissions
+  systemctl start backlight_permissions
+  echo "************************************"
+  echo "backlight permission service enabled"
+  echo "************************************"
+}
+
+post_upgrade() {
+  post_install
+}

@@ -1,0 +1,9 @@
+[Unit]
+Description=Set keyboard backlight to not require superuser authentication
+
+[Service]
+ExecStart=/usr/local/bin/set_backlight_permissions.sh
+
+[Install]
+WantedBy=multi-user.target
+
